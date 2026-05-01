@@ -141,9 +141,17 @@
 
 @media (max-width: 1024px) {
   .navbar-links { display: none; }
-  .donate-btn { display: none; }
+  .donate-btn { display: none !important; }
   .mobile-toggle { display: block; }
   .mobile-menu { display: block; }
   .topbar-contact { display: none; }
   .topbar-inner { justify-content: flex-end; }
+}
+
+@media (max-width: 768px) {
+  .logo-img-placeholder { width: 36px; height: 36px; font-size: 1.2rem; }
+  .logo-name { font-size: 1.05rem; }
+  .logo-sub { font-size: 0.75rem; }
+  .navbar-logo { gap: 0.6rem; }
+  .navbar-inner { height: 70px; }
 }

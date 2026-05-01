@@ -133,6 +133,11 @@
 }
 
 @media (max-width: 768px) {
-  .hero-actions { flex-direction: column; width: 100%; max-width: 300px; }
+  .hero { min-height: 500px; height: calc(100vh - 70px); }
+  .hero-title { font-size: 2.5rem; margin-bottom: 1rem; }
+  .hero-subtitle { font-size: 1.1rem; margin-bottom: 1.5rem; }
+  .hero-tag { font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .hero-text-box { margin-top: -4rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .hero-actions { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
   .hero-actions .btn { width: 100%; }
 }
