@@ -11,6 +11,108 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @import "tailwindcss";
+
+      @theme {
+        --color-primary: #C62828;
+        --color-primary-dark: #B71C1C;
+        --color-primary-light: #EF5350;
+        --color-secondary: #FF8F00;
+        --color-secondary-dark: #FF6F00;
+        --color-secondary-light: #FFB300;
+        --color-topbar: #111827;
+        --color-heading: #0F172A;
+        --color-text: #334155;
+        --color-muted: #64748B;
+        --color-border: #E2E8F0;
+        --color-surface: #F8FAFC;
+        
+        --font-sans: 'Inter', sans-serif;
+        --font-heading: 'Outfit', sans-serif;
+        
+        --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        --shadow-premium-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+        
+        --animate-fade-in: fadeIn 0.5s ease-out forwards;
+        --animate-slide-up: slideUp 0.6s ease-out forwards;
+        --animate-ken-burns: kenBurns 20s ease-in-out infinite alternate;
+
+        @keyframes fadeIn {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @keyframes slideUp {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes kenBurns {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
+      }
+
+      @layer base {
+        body {
+          @apply font-sans text-text bg-surface antialiased;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+          @apply font-heading text-heading font-bold tracking-tight;
+        }
+      }
+
+      @layer components {
+        .container {
+          @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+        }
+
+        .btn {
+          @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold transition-all duration-300 active:scale-95;
+        }
+
+        .btn-primary {
+          @apply bg-primary text-white hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5;
+        }
+
+        .btn-secondary {
+          @apply bg-secondary text-white hover:bg-secondary-dark hover:shadow-lg hover:-translate-y-0.5;
+        }
+
+        .btn-outline {
+          @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
+        }
+        
+        .btn-white {
+          @apply bg-white text-primary hover:bg-gray-50 hover:shadow-lg hover:-translate-y-0.5;
+        }
+
+        .section {
+          @apply py-16 md:py-24;
+        }
+
+        .section-tag {
+          @apply inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-4;
+        }
+
+        .card {
+          @apply bg-white rounded-2xl shadow-premium border border-border transition-all duration-300 hover:shadow-premium-hover hover:-translate-y-1;
+        }
+      }
+
+      .page-enter {
+        @apply animate-fade-in;
+      }
+
+      .scroll-reveal {
+        @apply opacity-0 translate-y-5 transition-all duration-700 ease-out;
+      }
+
+      .scroll-reveal.visible {
+        @apply opacity-100 translate-y-0;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

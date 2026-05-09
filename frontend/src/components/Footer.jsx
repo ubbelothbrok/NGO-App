@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import './Footer.css'
 
 const quickLinks = [
   { label: 'Home', path: '/' },
@@ -22,37 +21,52 @@ const activities = [
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-top">
-        <div className="container footer-grid">
+    <footer className="bg-[#0f172a] text-[#94a3b8]">
+      <div className="py-16 md:py-24 border-b border-white/5">
+        <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1 — Brand */}
-          <div className="footer-col footer-brand">
-            <div className="footer-logo">
-              <div className="footer-logo-icon"><i className="fa-solid fa-om" /></div>
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-2xl shadow-lg">
+                <i className="fa-solid fa-om" />
+              </div>
               <div>
-                <span className="footer-logo-name">Bharat Sevashram Sangha</span>
-                <span className="footer-logo-sub">Garia, Kolkata</span>
+                <span className="block text-white font-heading font-bold text-lg leading-tight uppercase tracking-wide">Bharat Sevashram Sangha</span>
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Garia, Kolkata</span>
               </div>
             </div>
-            <p className="footer-about">
+            <p className="text-sm leading-relaxed mb-8">
               Founded in 1917 by Srimat Swami Pranavanandaji Maharaj — a philanthropic, charitable organisation dedicated to the service of humanity for over a century.
             </p>
-            <div className="footer-socials">
-              <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" /></a>
-              <a href="#" aria-label="YouTube"><i className="fab fa-youtube" /></a>
-              <a href="#" aria-label="Twitter"><i className="fab fa-twitter" /></a>
-              <a href="#" aria-label="Instagram"><i className="fab fa-instagram" /></a>
+            <div className="flex gap-2">
+              {[
+                { icon: 'fab fa-facebook-f', label: 'Facebook' },
+                { icon: 'fab fa-youtube', label: 'YouTube' },
+                { icon: 'fab fa-twitter', label: 'Twitter' },
+                { icon: 'fab fa-instagram', label: 'Instagram' }
+              ].map((social) => (
+                <a 
+                  key={social.label} 
+                  href="#" 
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                >
+                  <i className={social.icon} />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Col 2 — Quick Links */}
-          <div className="footer-col">
-            <h3 className="footer-title">Quick Links</h3>
-            <ul className="footer-links">
+          <div>
+            <h3 className="text-white font-heading font-bold text-lg mb-8 relative pb-3 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-primary after:rounded-full">
+              Quick Links
+            </h3>
+            <ul className="flex flex-col gap-3">
               {quickLinks.map((l) => (
                 <li key={l.label}>
-                  <Link to={l.path}>
-                    <i className="fa-solid fa-angle-right" /> {l.label}
+                  <Link to={l.path} className="text-sm flex items-center gap-2 hover:text-secondary transition-all hover:pl-1">
+                    <i className="fa-solid fa-angle-right text-[10px] text-primary" /> {l.label}
                   </Link>
                 </li>
               ))}
@@ -60,13 +74,15 @@ export default function Footer() {
           </div>
 
           {/* Col 3 — Activities */}
-          <div className="footer-col">
-            <h3 className="footer-title">Our Activities</h3>
-            <ul className="footer-links">
+          <div>
+            <h3 className="text-white font-heading font-bold text-lg mb-8 relative pb-3 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-primary after:rounded-full">
+              Our Activities
+            </h3>
+            <ul className="flex flex-col gap-3">
               {activities.map((a) => (
                 <li key={a}>
-                  <Link to="/activities">
-                    <i className="fa-solid fa-angle-right" /> {a}
+                  <Link to="/activities" className="text-sm flex items-center gap-2 hover:text-secondary transition-all hover:pl-1">
+                    <i className="fa-solid fa-angle-right text-[10px] text-primary" /> {a}
                   </Link>
                 </li>
               ))}
@@ -74,41 +90,39 @@ export default function Footer() {
           </div>
 
           {/* Col 4 — Contact */}
-          <div className="footer-col">
-            <h3 className="footer-title">Contact Us</h3>
-            <ul className="footer-contact">
-              <li>
-                <i className="fa-solid fa-map-location-dot" />
-                <span>58 Pranavananda Road, Garia, South 24 Paragana, Kolkata-700084</span>
+          <div>
+            <h3 className="text-white font-heading font-bold text-lg mb-8 relative pb-3 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-primary after:rounded-full">
+              Contact Us
+            </h3>
+            <ul className="flex flex-col gap-5 mb-8">
+              <li className="flex gap-4">
+                <i className="fa-solid fa-map-location-dot text-primary text-base mt-1" />
+                <span className="text-sm leading-relaxed text-gray-400">58 Pranavananda Road, Garia, South 24 Paragana, Kolkata-700084</span>
               </li>
-              <li>
-                <i className="fa-solid fa-phone" />
-                <span>+91-9434012856<br />+91-9596943769</span>
+              <li className="flex gap-4">
+                <i className="fa-solid fa-phone text-primary text-base mt-1" />
+                <span className="text-sm leading-relaxed text-gray-400">+91-9434012856<br />+91-9596943769</span>
               </li>
-              <li>
-                <i className="fa-solid fa-envelope" />
-                <a href="mailto:contact@bssgaria.org">contact@bssgaria.org</a>
-              </li>
-              <li>
-                <i className="fa-solid fa-clock" />
-                <span>Mon – Sat: 8:00 AM – 7:00 PM</span>
+              <li className="flex gap-4">
+                <i className="fa-solid fa-envelope text-primary text-base mt-1" />
+                <a href="mailto:contact@bssgaria.org" className="text-sm text-gray-400 hover:text-white transition-colors">contact@bssgaria.org</a>
               </li>
             </ul>
-            <Link to="/donate" className="btn btn-primary footer-donate-btn">
-              <i className="fa-solid fa-heart" /> Donate Now
+            <Link to="/donate" className="btn bg-primary text-white hover:bg-primary-dark w-full py-3.5 shadow-lg shadow-primary/20">
+              <i className="fa-solid fa-heart text-xs" /> Donate Now
             </Link>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="footer-bottom">
-        <div className="container footer-bottom-inner">
+      <div className="py-6 bg-[#0a0f1a]">
+        <div className="container flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 font-medium">
           <p>© {new Date().getFullYear()} Bharat Sevashram Sangha Garia. All Rights Reserved.</p>
-          <div className="footer-bottom-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Disclaimer</a>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-gray-400 transition-colors">Terms of Use</a>
+            <a href="#" className="hover:text-gray-400 transition-colors">Disclaimer</a>
           </div>
         </div>
       </div>
