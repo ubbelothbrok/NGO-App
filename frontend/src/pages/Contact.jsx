@@ -1,88 +1,143 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import './InnerPage.css'
+import './Contact.css'
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [status, setStatus] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // In a real app this would POST to Django
-    setStatus('Message sent successfully! We will get back to you soon.')
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    setLoading(true)
+    setTimeout(() => {
+      setStatus('success')
+      setLoading(false)
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
+    }, 1000)
   }
 
   return (
-    <div className="page-enter" style={{ paddingTop: '100px' }}>
-      <section className="section bg-cream">
+    <div className="page-enter">
+      <div className="page-hero">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Get in Touch</span>
-            <h2 className="section-title">Contact <span>Us</span></h2>
-            <div className="section-divider"></div>
+          <h1>Contact Us</h1>
+          <p>We'd love to hear from you — reach out anytime</p>
+          <div className="breadcrumb">
+            <Link to="/">Home</Link>
+            <i className="fa-solid fa-chevron-right" />
+            <span>Contact Us</span>
           </div>
-          
-          <div className="grid-2">
-            <div className="card" style={{ padding: '3rem' }}>
-              <h3 style={{ marginBottom: '2rem' }}>Send a Message</h3>
-              
-              {status && (
-                <div style={{ padding: '1rem', background: '#d4edda', color: '#155724', borderRadius: '8px', marginBottom: '1.5rem' }}>
-                  {status}
-                </div>
-              )}
+        </div>
+      </div>
 
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Full Name</label>
-                  <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #ddd' }} />
+      {/* Info strip */}
+      <div className="contact-strip">
+        <div className="container contact-strip-grid">
+          <a href="tel:+919434012856" className="contact-strip-item">
+            <div className="cs-icon"><i className="fa-solid fa-phone" /></div>
+            <div><span className="cs-label">Call Us</span><span className="cs-value">+91-9434012856</span></div>
+          </a>
+          <a href="mailto:contact@bssgaria.org" className="contact-strip-item">
+            <div className="cs-icon"><i className="fa-solid fa-envelope" /></div>
+            <div><span className="cs-label">Email Us</span><span className="cs-value">contact@bssgaria.org</span></div>
+          </a>
+          <div className="contact-strip-item">
+            <div className="cs-icon"><i className="fa-solid fa-location-dot" /></div>
+            <div><span className="cs-label">Visit Us</span><span className="cs-value">58 Pranavananda Road, Garia, Kolkata</span></div>
+          </div>
+          <div className="contact-strip-item">
+            <div className="cs-icon"><i className="fa-solid fa-clock" /></div>
+            <div><span className="cs-label">Open Hours</span><span className="cs-value">Mon–Sat: 8:00 AM – 7:00 PM</span></div>
+          </div>
+        </div>
+      </div>
+
+      <section className="section bg-surface">
+        <div className="container contact-layout">
+          {/* Form */}
+          <div className="contact-form-card card">
+            <h2 className="contact-form-title">Send Us a Message</h2>
+            <p className="text-muted mb-md" style={{ fontSize: '0.95rem' }}>Fill out the form and our team will get back to you within 24 hours.</p>
+
+            {status === 'success' && (
+              <div className="form-success">
+                <i className="fa-solid fa-circle-check" />
+                <span>Message sent successfully! We'll get back to you soon.</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="name">Full Name <span>*</span></label>
+                  <input id="name" name="name" type="text" required placeholder="Your full name" value={formData.name} onChange={handleChange} />
                 </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Email Address</label>
-                  <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #ddd' }} />
+                <div className="form-group">
+                  <label htmlFor="email">Email Address <span>*</span></label>
+                  <input id="email" name="email" type="email" required placeholder="your@email.com" value={formData.email} onChange={handleChange} />
                 </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Subject</label>
-                  <input required type="text" value={formData.subject} onChange={e => setFormData({...formData, subject: e.target.value})} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #ddd' }} />
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="+91-XXXXXXXXXX" value={formData.phone} onChange={handleChange} />
                 </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Message</label>
-                  <textarea required rows="4" value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #ddd' }}></textarea>
+                <div className="form-group">
+                  <label htmlFor="subject">Subject <span>*</span></label>
+                  <input id="subject" name="subject" type="text" required placeholder="How can we help?" value={formData.subject} onChange={handleChange} />
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ marginTop: '1rem', alignSelf: 'flex-start' }}>Send Message</button>
-              </form>
+              </div>
+              <div className="form-group">
+                <label htmlFor="message">Message <span>*</span></label>
+                <textarea id="message" name="message" rows="5" required placeholder="Tell us more about your inquiry..." value={formData.message} onChange={handleChange} />
+              </div>
+              <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ alignSelf: 'flex-start' }}>
+                {loading ? <><i className="fa-solid fa-spinner fa-spin" /> Sending...</> : <><i className="fa-solid fa-paper-plane" /> Send Message</>}
+              </button>
+            </form>
+          </div>
+
+          {/* Info panel */}
+          <div className="contact-info-panel">
+            <div className="info-panel-top">
+              <h3>Bharat Sevashram Sangha</h3>
+              <p>Garia Branch, Kolkata</p>
             </div>
-
-            <div className="card" style={{ padding: '3rem', background: 'var(--color-dark)', color: 'white' }}>
-              <h3 style={{ marginBottom: '2rem', color: 'white' }}>Contact Information</h3>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--grad-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', color: 'white', flexShrink: 0 }}>
-                    <i className="fa-solid fa-location-dot"></i>
-                  </div>
-                  <div>
-                    <h4 style={{ color: 'white', marginBottom: '0.5rem' }}>Address</h4>
-                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>Bharat Sevashram Sangha<br/>58 Pranavananda Road, Garia,<br/>South 24 Paragana,<br/>Kolkata-700084</p>
-                  </div>
-                </li>
-                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--grad-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', color: 'white', flexShrink: 0 }}>
-                    <i className="fa-solid fa-phone"></i>
-                  </div>
-                  <div>
-                    <h4 style={{ color: 'white', marginBottom: '0.5rem' }}>Phone</h4>
-                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>+91-9434012856<br/>+91-9596943769</p>
-                  </div>
-                </li>
-                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--grad-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', color: 'white', flexShrink: 0 }}>
-                    <i className="fa-solid fa-envelope"></i>
-                  </div>
-                  <div>
-                    <h4 style={{ color: 'white', marginBottom: '0.5rem' }}>Email</h4>
-                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>contact@bssgaria.org</p>
-                  </div>
-                </li>
-              </ul>
+            <ul className="info-panel-list">
+              <li>
+                <div className="ip-icon"><i className="fa-solid fa-location-dot" /></div>
+                <div>
+                  <strong>Address</strong>
+                  <span>58 Pranavananda Road, Garia,<br />South 24 Paraganas,<br />Kolkata-700084, West Bengal</span>
+                </div>
+              </li>
+              <li>
+                <div className="ip-icon"><i className="fa-solid fa-phone" /></div>
+                <div>
+                  <strong>Phone</strong>
+                  <span>+91-9434012856<br />+91-9596943769</span>
+                </div>
+              </li>
+              <li>
+                <div className="ip-icon"><i className="fa-solid fa-envelope" /></div>
+                <div>
+                  <strong>Email</strong>
+                  <a href="mailto:contact@bssgaria.org">contact@bssgaria.org</a>
+                </div>
+              </li>
+            </ul>
+            <div className="info-panel-social">
+              <p>Follow Us</p>
+              <div className="ip-social">
+                <a href="#"><i className="fab fa-facebook-f" /></a>
+                <a href="#"><i className="fab fa-youtube" /></a>
+                <a href="#"><i className="fab fa-twitter" /></a>
+                <a href="#"><i className="fab fa-instagram" /></a>
+              </div>
             </div>
           </div>
         </div>

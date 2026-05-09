@@ -2,13 +2,39 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import './Navbar.css'
 
+const navItems = [
+  { label: 'Home', path: '/' },
+  {
+    label: 'About Us',
+    path: '/about',
+    children: [
+      { label: 'History & Mission', path: '/about' },
+      { label: 'Our Activities', path: '/activities' },
+      { label: 'Our Branches', path: '/branches' },
+    ],
+  },
+  { label: 'Activities', path: '/activities' },
+  { label: 'Branches', path: '/branches' },
+  { label: 'Media', path: '/media' },
+  { label: 'Contact Us', path: '/contact' },
+]
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [mobileDropdown, setMobileDropdown] = useState(null)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
     setMenuOpen(false)
+    setMobileDropdown(null)
   }, [location])
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 30)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
@@ -16,66 +42,114 @@ export default function Navbar() {
       <div className="topbar">
         <div className="container topbar-inner">
           <div className="topbar-contact">
-            <span><i className="fa-solid fa-phone"></i> +91-9434012856</span>
-            <span><i className="fa-solid fa-envelope"></i> contact@bssgaria.org</span>
+            <a href="tel:+919434012856"><i className="fa-solid fa-phone" /> +91-9434012856</a>
+            <a href="mailto:contact@bssgaria.org"><i className="fa-solid fa-envelope" /> contact@bssgaria.org</a>
+            <span className="topbar-addr"><i className="fa-solid fa-location-dot" /> 58 Pranavananda Road, Garia, Kolkata-700084</span>
           </div>
           <div className="topbar-social">
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-youtube"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" /></a>
+            <a href="#" aria-label="YouTube"><i className="fab fa-youtube" /></a>
+            <a href="#" aria-label="Twitter"><i className="fab fa-twitter" /></a>
+            <a href="#" aria-label="Instagram"><i className="fab fa-instagram" /></a>
           </div>
         </div>
       </div>
 
       {/* Main Navbar */}
-      <header className="navbar">
+      <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container navbar-inner">
-          {/* Logo */}
           <Link to="/" className="navbar-logo">
             <div className="logo-img-placeholder">
-              <i className="fa-solid fa-om"></i>
+              <i className="fa-solid fa-om" />
             </div>
             <div className="logo-text">
               <span className="logo-name">Bharat Sevashram Sangha</span>
-              <span className="logo-sub">Garia, Kolkata</span>
+              <span className="logo-sub">Garia, Kolkata — Est. 1917</span>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="navbar-links">
-            <NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink>
-            <NavLink to="/activities" className={({ isActive }) => isActive ? 'active' : ''}>Activities</NavLink>
-            <NavLink to="/branches" className={({ isActive }) => isActive ? 'active' : ''}>Branches</NavLink>
-            <NavLink to="/media" className={({ isActive }) => isActive ? 'active' : ''}>Media</NavLink>
-            <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''}>Contact Us</NavLink>
+            {navItems.map((item) =>
+              item.children ? (
+                <div key={item.label} className="nav-item has-dropdown">
+                  <NavLink to={item.path} className={({ isActive }) => (isActive ? 'active' : '')}>
+                    {item.label} <i className="fa-solid fa-chevron-down nav-arrow" />
+                  </NavLink>
+                  <div className="dropdown">
+                    {item.children.map((child) => (
+                      <Link key={child.label} to={child.path} className="dropdown-item">
+                        <i className="fa-solid fa-angle-right" /> {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <NavLink
+                  key={item.label}
+                  to={item.path}
+                  end={item.path === '/'}
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  {item.label}
+                </NavLink>
+              )
+            )}
           </nav>
 
-          {/* CTA & Mobile Toggle */}
           <div className="navbar-actions">
             <Link to="/donate" className="btn btn-white donate-btn">
-              Donate Now
+              <i className="fa-solid fa-heart" /> Donate Now
             </Link>
-            <button className="mobile-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-              <i className={`fa-solid ${menuOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
+            <button
+              className="mobile-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              <i className={`fa-solid ${menuOpen ? 'fa-xmark' : 'fa-bars'}`} />
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        {menuOpen && (
-          <div className="mobile-menu">
-            <NavLink to="/" end>Home</NavLink>
-            <NavLink to="/about">About Us</NavLink>
-            <NavLink to="/activities">Activities</NavLink>
-            <NavLink to="/branches">Branches</NavLink>
-            <NavLink to="/media">Media</NavLink>
-            <NavLink to="/contact">Contact Us</NavLink>
-            <div style={{ padding: '1rem' }}>
-              <Link to="/donate" className="btn btn-white" style={{ width: '100%' }}>Donate Now</Link>
-            </div>
+        <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+          {navItems.map((item) =>
+            item.children ? (
+              <div key={item.label} className="mobile-nav-group">
+                <button
+                  className="mobile-nav-parent"
+                  onClick={() =>
+                    setMobileDropdown(mobileDropdown === item.label ? null : item.label)
+                  }
+                >
+                  {item.label}
+                  <i
+                    className={`fa-solid fa-chevron-${
+                      mobileDropdown === item.label ? 'up' : 'down'
+                    }`}
+                  />
+                </button>
+                {mobileDropdown === item.label && (
+                  <div className="mobile-dropdown">
+                    {item.children.map((child) => (
+                      <Link key={child.label} to={child.path} className="mobile-dropdown-item">
+                        <i className="fa-solid fa-angle-right" /> {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink key={item.label} to={item.path} end={item.path === '/'}>
+                {item.label}
+              </NavLink>
+            )
+          )}
+          <div className="mobile-cta">
+            <Link to="/donate" className="btn btn-primary" style={{ width: '100%' }}>
+              <i className="fa-solid fa-heart" /> Donate Now
+            </Link>
           </div>
-        )}
+        </div>
       </header>
     </>
   )
