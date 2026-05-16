@@ -124,7 +124,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden fixed inset-0 top-[60px] bg-white z-[60] p-6 transition-transform duration-500 ease-in-out transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`lg:hidden absolute top-full left-0 w-full h-screen overflow-y-auto pb-32 bg-white z-[60] p-6 transition-transform duration-500 ease-in-out transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex flex-col gap-1">
             {navItems.map((item) =>
               item.children ? (
