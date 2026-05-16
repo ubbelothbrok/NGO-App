@@ -77,11 +77,11 @@ export default function Hero() {
               <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-2xl font-medium">
                 {slide.subtitle}
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to={slide.cta.path} className="btn bg-primary text-white hover:bg-primary-dark px-8 py-4 text-base">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-4">
+                <Link to={slide.cta.path} className="btn bg-primary text-white hover:bg-primary-dark px-8 py-4 text-base w-full sm:w-auto text-center justify-center">
                   {slide.cta.label} <i className="fa-solid fa-arrow-right ml-2 text-xs" />
                 </Link>
-                <Link to={slide.cta2.path} className="btn border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-base">
+                <Link to={slide.cta2.path} className="btn border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-base w-full sm:w-auto text-center justify-center">
                   {slide.cta2.label}
                 </Link>
               </div>
@@ -91,7 +91,7 @@ export default function Hero() {
       ))}
 
       {/* Navigation arrows */}
-      <div className="absolute inset-0 flex items-center justify-between px-4 md:px-8 pointer-events-none z-20">
+      <div className="absolute inset-0 hidden md:flex items-center justify-between px-4 md:px-8 pointer-events-none z-20">
         <button 
           className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-primary hover:border-primary transition-all pointer-events-auto group"
           onClick={prev}
