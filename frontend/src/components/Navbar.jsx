@@ -61,25 +61,25 @@ export default function Navbar() {
       </div>
 
       {/* Main Navbar */}
-      <header className={`fixed left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'top-0 bg-primary/95 backdrop-blur-md shadow-lg py-2' : 'top-10 md:top-8 py-4 bg-primary'}`}>
+      <header className={`fixed left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'top-0 bg-white/95 backdrop-blur-md shadow-md py-2' : 'top-10 md:top-8 py-4 bg-white shadow-sm'}`}>
         <div className="container flex justify-between items-center">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white text-primary flex items-center justify-center text-xl md:text-2xl shadow-lg group-hover:scale-105 transition-transform">
               <i className="fa-solid fa-om" />
             </div>
             <div className="flex flex-col">
-              <span className="text-white font-heading font-bold text-sm md:text-lg leading-tight uppercase tracking-wide">Bharat Sevashram Sangha</span>
-              <span className="text-white/70 text-[10px] md:text-xs font-medium">Garia, Kolkata — Est. 1917</span>
+              <span className="text-primary font-heading font-bold text-sm md:text-lg leading-tight uppercase tracking-wide">Bharat Sevashram Sangha</span>
+              <span className="text-text text-[10px] md:text-xs font-medium">Garia, Kolkata — Est. 1917</span>
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 font-accent">
             {navItems.map((item) =>
               item.children ? (
                 <div key={item.label} className="relative group/drop py-2 px-3">
                   <NavLink 
                     to={item.path} 
-                    className={({ isActive }) => `flex items-center gap-1.5 text-sm font-bold tracking-wide transition-colors ${isActive ? 'text-secondary' : 'text-white/90 hover:text-white'}`}
+                    className={({ isActive }) => `flex items-center gap-1.5 text-sm font-bold tracking-wide transition-colors ${isActive ? 'text-primary' : 'text-text hover:text-primary'}`}
                   >
                     {item.label} <i className="fa-solid fa-chevron-down text-[10px] opacity-70 group-hover/drop:rotate-180 transition-transform" />
                   </NavLink>
@@ -101,7 +101,7 @@ export default function Navbar() {
                   key={item.label}
                   to={item.path}
                   end={item.path === '/'}
-                  className={({ isActive }) => `py-2 px-4 text-sm font-bold tracking-wide transition-colors ${isActive ? 'text-secondary' : 'text-white/90 hover:text-white'}`}
+                  className={({ isActive }) => `py-2 px-4 text-sm font-bold tracking-wide transition-colors ${isActive ? 'text-primary' : 'text-text hover:text-primary'}`}
                 >
                   {item.label}
                 </NavLink>
@@ -110,11 +110,11 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/donate" className="hidden sm:flex btn bg-white text-primary hover:bg-gray-50 px-5 py-2 text-sm shadow-md">
+            <Link to="/donate" className="hidden sm:flex btn bg-primary text-white hover:bg-primary-dark px-6 py-2 text-sm shadow-md font-accent uppercase">
               <i className="fa-solid fa-heart text-xs" /> Donate Now
             </Link>
             <button
-              className="lg:hidden w-10 h-10 flex items-center justify-center text-white text-xl"
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-primary text-xl"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >

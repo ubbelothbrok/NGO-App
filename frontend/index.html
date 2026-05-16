@@ -9,28 +9,29 @@
     <title>Bharat Sevashram Sangha – Garia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @import "tailwindcss";
 
       @theme {
-        --color-primary: #C62828;
-        --color-primary-dark: #B71C1C;
-        --color-primary-light: #EF5350;
-        --color-secondary: #FF8F00;
-        --color-secondary-dark: #FF6F00;
-        --color-secondary-light: #FFB300;
-        --color-topbar: #111827;
-        --color-heading: #0F172A;
-        --color-text: #334155;
-        --color-muted: #64748B;
-        --color-border: #E2E8F0;
-        --color-surface: #F8FAFC;
+        --color-primary: #DA291C;
+        --color-primary-dark: #B92318;
+        --color-primary-light: #E05449;
+        --color-secondary: #1AA7B8;
+        --color-secondary-dark: #158A98;
+        --color-secondary-light: #48B9C6;
+        --color-topbar: #F3F4F6;
+        --color-heading: #111827;
+        --color-text: #333333;
+        --color-muted: #6B7280;
+        --color-border: #E5E7EB;
+        --color-surface: #FFFFFF;
         
         --font-sans: 'Inter', sans-serif;
-        --font-heading: 'Outfit', sans-serif;
+        --font-heading: 'Oswald', sans-serif;
+        --font-accent: 'Lato', sans-serif;
         
         --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
         --shadow-premium-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
@@ -59,7 +60,7 @@
         }
         
         h1, h2, h3, h4, h5, h6 {
-          @apply font-heading text-heading font-bold tracking-tight;
+          @apply font-heading text-heading font-bold uppercase tracking-wide;
         }
       }
 
@@ -69,7 +70,7 @@
         }
 
         .btn {
-          @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold transition-all duration-300 active:scale-95;
+          @apply inline-flex items-center justify-center gap-2 px-8 py-3 rounded-md font-accent font-bold uppercase tracking-wider transition-all duration-300 active:scale-95 shadow-sm;
         }
 
         .btn-primary {
@@ -93,11 +94,11 @@
         }
 
         .section-tag {
-          @apply inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-4;
+          @apply inline-block px-4 py-1.5 rounded border border-primary/30 text-primary font-accent text-xs font-bold uppercase tracking-widest mb-4;
         }
 
         .card {
-          @apply bg-white rounded-2xl shadow-premium border border-border transition-all duration-300 hover:shadow-premium-hover hover:-translate-y-1;
+          @apply bg-white rounded-md shadow-sm border border-border transition-all duration-300 hover:shadow-md hover:-translate-y-1;
         }
       }
 

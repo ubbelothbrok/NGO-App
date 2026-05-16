@@ -67,7 +67,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
           <div className="relative h-full container flex items-center">
             <div className={`max-w-3xl transition-all duration-700 transform ${i === current ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-widest mb-6 shadow-lg">
+              <span className="inline-block px-4 py-1.5 rounded bg-primary text-white text-xs font-bold uppercase tracking-widest mb-6 shadow-sm">
                 {slide.tag}
               </span>
               <h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-heading font-extrabold leading-[1.1] mb-6 drop-shadow-md">
@@ -93,13 +93,13 @@ export default function Hero() {
       {/* Navigation arrows */}
       <div className="absolute inset-0 hidden md:flex items-center justify-between px-4 md:px-8 pointer-events-none z-20">
         <button 
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-primary hover:border-primary transition-all pointer-events-auto group"
+          className="w-12 h-12 flex items-center justify-center rounded-md bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-primary hover:border-primary transition-all pointer-events-auto group"
           onClick={prev}
         >
           <i className="fa-solid fa-chevron-left group-hover:-translate-x-0.5 transition-transform" />
         </button>
         <button 
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-primary hover:border-primary transition-all pointer-events-auto group"
+          className="w-12 h-12 flex items-center justify-center rounded-md bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-primary hover:border-primary transition-all pointer-events-auto group"
           onClick={next}
         >
           <i className="fa-solid fa-chevron-right group-hover:translate-x-0.5 transition-transform" />
@@ -111,7 +111,7 @@ export default function Hero() {
         {slides.map((_, i) => (
           <button
             key={i}
-            className={`h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-secondary shadow-lg' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+            className={`h-2 rounded transition-all duration-300 ${i === current ? 'w-8 bg-secondary shadow-sm' : 'w-2 bg-white/40 hover:bg-white/60'}`}
             onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}`}
           />

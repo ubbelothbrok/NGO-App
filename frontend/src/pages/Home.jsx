@@ -71,7 +71,16 @@ const vaniItems = [
   { q: 'What are Real Virtues?', a: 'Heroism, Virility, Manliness and Aspiration' },
   { q: 'What is Real Strength?', a: 'Patience, Fortitude and Endurance' },
 ]
+const urgentCampaigns = [
+  { id: 1, title: 'Winter Blanket Drive', desc: 'Provide warmth to the homeless and elderly during the severe winter months in northern India.', raised: 75000, goal: 100000, image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&q=80' },
+  { id: 2, title: 'Rural Healthcare Fund', desc: 'Sponsor our mobile medical units reaching remote villages with life-saving medicines.', raised: 120000, goal: 200000, image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&q=80' },
+  { id: 3, title: 'Education Sponsorship', desc: 'Fund a child\'s entire academic year including books, uniforms, and tuition.', raised: 45000, goal: 50000, image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80' },
+]
 
+const testimonials = [
+  { id: 1, name: 'Anjali Sharma', role: 'Scholarship Recipient', quote: 'The Sangha\'s free coaching center changed my life. I am now pursuing my engineering degree, a dream my parents could never have afforded.', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80' },
+  { id: 2, name: 'Ramesh Das', role: 'Flood Survivor', quote: 'When the floods washed away our home, the volunteers were the first to reach us with food and medical supplies. They saved my family.', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80' },
+]
 export default function Home() {
   return (
     <div className="animate-fade-in">
@@ -174,6 +183,42 @@ export default function Home() {
                 <Link to={p.link} className="inline-flex items-center gap-2 text-sm font-bold text-primary group/link">
                   Learn more <i className="fa-solid fa-arrow-right text-[10px] group-hover/link:translate-x-1 transition-transform" />
                 </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Urgent Campaigns */}
+      <section className="section bg-white">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="section-tag bg-primary/10 text-primary border-primary/20">Urgent Needs</span>
+            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-heading mt-4 uppercase">Current <span className="text-primary">Campaigns</span></h2>
+            <div className="w-20 h-1.5 bg-primary rounded-full mx-auto my-6" />
+            <p className="text-muted text-lg">Your immediate support can bring hope and relief to those who need it most right now.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {urgentCampaigns.map((camp) => (
+              <div key={camp.id} className="card flex flex-col overflow-hidden group">
+                <div className="relative h-48 overflow-hidden">
+                  <img src={camp.image} alt={camp.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute top-4 left-4 bg-secondary text-white text-[10px] font-bold uppercase px-3 py-1 rounded">Urgent</div>
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-heading font-bold text-heading mb-3 uppercase group-hover:text-primary transition-colors">{camp.title}</h3>
+                  <p className="text-sm text-muted mb-6 flex-grow">{camp.desc}</p>
+                  <div className="mb-6">
+                    <div className="flex justify-between text-xs font-bold mb-2">
+                      <span className="text-primary">Raised: ₹{camp.raised.toLocaleString()}</span>
+                      <span className="text-muted">Goal: ₹{camp.goal.toLocaleString()}</span>
+                    </div>
+                    <div className="w-full bg-surface rounded-full h-2 overflow-hidden">
+                      <div className="bg-primary h-2 rounded-full" style={{ width: `${(camp.raised / camp.goal) * 100}%` }} />
+                    </div>
+                  </div>
+                  <Link to="/donate" className="btn btn-primary w-full py-3 text-sm">Donate Now</Link>
+                </div>
               </div>
             ))}
           </div>
@@ -311,6 +356,33 @@ export default function Home() {
                 </div>
                 <h4 className="text-secondary font-heading font-bold text-xl mb-4 leading-snug drop-shadow-sm">{v.q}</h4>
                 <p className="text-white/70 text-base leading-relaxed italic">"{v.a}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stories of Impact */}
+      <section className="section bg-surface">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="section-tag bg-secondary/10 text-secondary border-secondary/20">Testimonials</span>
+            <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-heading mt-4 uppercase">Stories of <span className="text-secondary">Impact</span></h2>
+            <div className="w-20 h-1.5 bg-secondary rounded-full mx-auto my-6" />
+            <p className="text-muted text-lg">Hear from the people whose lives have been transformed through your support and our dedicated volunteers.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {testimonials.map((story) => (
+              <div key={story.id} className="card p-8 md:p-10 flex flex-col justify-between">
+                <i className="fa-solid fa-quote-left text-4xl text-border mb-6" />
+                <p className="text-lg text-heading font-medium italic mb-8 leading-relaxed">"{story.quote}"</p>
+                <div className="flex items-center gap-4">
+                  <img src={story.image} alt={story.name} className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" />
+                  <div>
+                    <h4 className="font-heading font-bold text-lg text-heading">{story.name}</h4>
+                    <span className="text-xs text-secondary font-bold uppercase tracking-wider">{story.role}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

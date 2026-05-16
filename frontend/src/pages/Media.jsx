@@ -16,11 +16,18 @@ const photos = [
   { src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80', caption: 'Awareness Rally', category: 'Events' },
 ]
 
+const videos = [
+  { id: '1', title: 'Winter Relief Operations 2024', thumb: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80', videoId: 'dQw4w9WgXcQ' },
+  { id: '2', title: 'Youth Empowerment Camp Highlight', thumb: 'https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?w=600&q=80', videoId: 'dQw4w9WgXcQ' },
+  { id: '3', title: 'Healthcare Drive in Rural Bengal', thumb: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=600&q=80', videoId: 'dQw4w9WgXcQ' },
+]
+
 const categories = ['All', ...new Set(photos.map((p) => p.category))]
 
 export default function Media() {
   const [active, setActive] = useState('All')
   const [lightbox, setLightbox] = useState(null)
+  const [videoLightbox, setVideoLightbox] = useState(null)
 
   const filtered = active === 'All' ? photos : photos.filter((p) => p.category === active)
 
@@ -91,6 +98,38 @@ export default function Media() {
         </div>
       </section>
 
+      {/* Video Gallery */}
+      <section className="section bg-white border-t border-border">
+        <div className="container">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="section-tag bg-secondary/10 text-secondary border-secondary/20">Video Library</span>
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-heading mt-4 uppercase">Watch Our <span className="text-secondary">Impact</span></h2>
+            <div className="w-20 h-1.5 bg-secondary rounded-full mx-auto my-6" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {videos.map((vid) => (
+              <div 
+                key={vid.id} 
+                className="card overflow-hidden group cursor-pointer"
+                onClick={() => setVideoLightbox(vid)}
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img src={vid.thumb} alt={vid.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/90 text-white flex items-center justify-center text-2xl shadow-lg transform group-hover:scale-110 transition-transform pl-1">
+                      <i className="fa-solid fa-play" />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-heading font-bold text-lg text-heading group-hover:text-primary transition-colors leading-tight">{vid.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Lightbox */}
       {lightbox && (
         <div className="fixed inset-0 bg-black/95 z-[100] flex flex-col items-center justify-center p-4 md:p-8 animate-fade-in" onClick={() => setLightbox(null)}>
@@ -110,6 +149,27 @@ export default function Media() {
               <span className="inline-block px-4 py-1 rounded-full bg-primary text-white text-[10px] font-bold uppercase tracking-widest mb-3">{lightbox.category}</span>
               <p className="text-white text-xl md:text-2xl font-heading font-bold drop-shadow-md">{lightbox.caption}</p>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Video Lightbox */}
+      {videoLightbox && (
+        <div className="fixed inset-0 bg-black/95 z-[100] flex flex-col items-center justify-center p-4 md:p-8 animate-fade-in" onClick={() => setVideoLightbox(null)}>
+          <button 
+            className="absolute top-6 right-6 md:top-10 md:right-10 text-white text-3xl md:text-5xl hover:text-primary transition-colors z-[110]" 
+            onClick={() => setVideoLightbox(null)}
+          >
+            <i className="fa-solid fa-xmark" />
+          </button>
+          <div className="relative max-w-5xl w-full aspect-video bg-black shadow-2xl rounded-lg overflow-hidden border-2 border-white/10" onClick={(e) => e.stopPropagation()}>
+            <iframe 
+              className="absolute inset-0 w-full h-full"
+              src={`https://www.youtube.com/embed/${videoLightbox.videoId}?autoplay=1`} 
+              title={videoLightbox.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            />
           </div>
         </div>
       )}

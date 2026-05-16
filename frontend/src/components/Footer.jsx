@@ -22,6 +22,20 @@ const activities = [
 export default function Footer() {
   return (
     <footer className="bg-[#0f172a] text-[#94a3b8]">
+      {/* Newsletter Subscription */}
+      <div className="border-b border-white/5 bg-black/20">
+        <div className="container py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="max-w-xl">
+            <h3 className="text-white font-heading font-bold text-2xl md:text-3xl mb-2 uppercase">Subscribe to our Newsletter</h3>
+            <p className="text-sm text-gray-400">Stay updated with our latest campaigns, stories of impact, and ways you can help make a difference.</p>
+          </div>
+          <form className="flex w-full md:w-auto min-w-[300px] gap-2" onSubmit={(e) => { e.preventDefault(); alert('Thanks for subscribing!'); }}>
+            <input type="email" placeholder="Your Email Address" className="px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white focus:outline-none focus:border-primary flex-grow" required />
+            <button type="submit" className="btn btn-primary px-6 py-3 rounded-md text-sm shadow-none">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
       <div className="py-16 md:py-24 border-b border-white/5">
         <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1 — Brand */}
